@@ -60,4 +60,21 @@ public class AdminPhotoController
 		list.add(photo);
 		return photo;
 	}
+	
+	@RequestMapping(value = "/admin/api/photos/{id}", method = RequestMethod.PUT)
+	public Photo update(@PathVariable int id, @RequestBody Photo photo)
+	{
+		Optional<Photo> foundPhoto = list.stream()
+				.filter(item->item.getId() == id)
+				.findFirst();
+		
+		if (foundPhoto.isEmpty())
+		{
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found");
+		}
+		
+		foundPhoto.get().setUrl(photo.getUrl());
+		
+		return foundPhoto.get();
+	}
 }
