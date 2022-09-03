@@ -65,8 +65,8 @@ public class AdminPhotoController
 	public Photo update(@PathVariable int id, @RequestBody Photo photo)
 	{
 		Optional<Photo> foundPhoto = list.stream()
-				.filter(item->item.getId() == id)
-				.findFirst();
+										 .filter(item->item.getId() == id)
+				                         .findFirst();
 		
 		if (foundPhoto.isEmpty())
 		{
@@ -76,5 +76,20 @@ public class AdminPhotoController
 		foundPhoto.get().setUrl(photo.getUrl());
 		
 		return foundPhoto.get();
+	}
+	
+	@RequestMapping(value = "/admin/api/photos/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable int id)
+	{
+		Optional<Photo> foundPhoto = list.stream()
+				                         .filter(item->item.getId() == id)
+				                         .findFirst();
+		
+		if (foundPhoto.isEmpty())
+		{
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found");
+		}
+		
+		list.remove(foundPhoto.get());
 	}
 }
