@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.myphotos.demo.model.Photo;
 
-@Service
+@Service("mainPhotoService")
 public class PhotoService implements IPhotoService 
 {
 	
