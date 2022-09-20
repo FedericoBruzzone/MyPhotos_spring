@@ -4,17 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.myphotos.demo.model.Photo;
 
 @Service
-public class PhotoService {
+public class PhotoService implements IPhotoService 
+{
 	
 	private List<Photo> list;
 	
@@ -31,11 +27,13 @@ public class PhotoService {
 		lastId = 3;
 	}
 	
+	@Override
 	public Iterable<Photo> getAll()
 	{
 		return list;
 	}
 	
+	@Override
 	public Optional<Photo> getById(int id)
 	{
 		Optional<Photo> photo = list.stream()
@@ -45,6 +43,7 @@ public class PhotoService {
 		return photo;
 	}
 	
+	@Override
 	public Photo create(Photo photo)
 	{
 		lastId++;
@@ -53,6 +52,7 @@ public class PhotoService {
 		return photo;
 	}
 	
+	@Override
 	public Optional<Photo> update(int id, Photo photo)
 	{
 		Optional<Photo> foundPhoto = list.stream()
@@ -69,6 +69,7 @@ public class PhotoService {
 		return foundPhoto;
 	}
 	
+	@Override
 	public Boolean delete(int id)
 	{
 		Optional<Photo> foundPhoto = list.stream()

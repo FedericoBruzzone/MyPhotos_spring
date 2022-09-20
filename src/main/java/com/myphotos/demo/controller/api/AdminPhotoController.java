@@ -1,10 +1,9 @@
 package com.myphotos.demo.controller.api;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,13 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.myphotos.demo.model.Photo;
-import com.myphotos.demo.service.PhotoService;
+import com.myphotos.demo.service.IPhotoService;
 
 @RestController
 public class AdminPhotoController 
 {
 	@Autowired
-	private PhotoService photoService;
+	@Qualifier("mainPhotoService")
+	private IPhotoService photoService;
 	
 	public AdminPhotoController()
 	{
