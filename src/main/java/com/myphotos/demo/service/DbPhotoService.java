@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.myphotos.demo.model.Photo;
 import com.myphotos.demo.repository.IPhotoRepository;
 
-
+@Service("mainPhotoService")
 public class DbPhotoService implements IPhotoService 
 {
 	@Autowired
